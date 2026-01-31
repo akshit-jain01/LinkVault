@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const uploadRoutes = require("./routes/upload");
 const viewRoutes = require("./routes/view");
+const cors = require("cors");
 
 
 const app = express();
 const PORT = 3000;
 
-
+app.use(cors());
 app.use(express.json());
 app.use("/api", uploadRoutes);
 app.use("/api", viewRoutes);

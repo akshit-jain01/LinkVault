@@ -1,5 +1,6 @@
 const express = require("express");
 const Content = require("../models/Content");
+const fs = require("fs");
 
 const router = express.Router();
 
@@ -11,9 +12,18 @@ router.get("/view/:id", async (req, res) => {
       return res.status(403).json({ error: "Invalid link" });
     }
 
+    if (content.type === "file") {
+        return res.download(content.content);
+    }
+
+
+
     if (content.expiresAt < new Date()) {
-      await Content.deleteOne({ _id: content._id });
-      return res.status(403).json({ error: "Link expired" });
+        if (content.type === "file") {
+            fs.unlink(content.content, () => {});
+        }
+        await Content.deleteOne({ _id: content._id });
+        return res.status(403).json({ error: "Link expired" });
     }
 
     res.status(200).json({
