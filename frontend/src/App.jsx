@@ -1,13 +1,12 @@
-import Upload from "./Upload";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import View from "./View";
 
-function App() {
+export default function App() {
   return (
-    <div style={{ padding: "40px", fontFamily: "Arial" }}>
-      <h1>LinkVault</h1>
-      <Upload />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/view/:id" element={<View />} />
+    </Routes>
   );
 }
-
-export default App;
-
