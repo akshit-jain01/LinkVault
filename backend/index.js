@@ -21,15 +21,15 @@ const MONGO_URI = "mongodb://127.0.0.1:27017/linkvault";
 mongoose
   .connect(MONGO_URI)
   .then(() => {
-    console.log("✅ MongoDB connected");
+    console.log("MongoDB connected");
   })
   .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("MongoDB connection error:", err);
   });
 
 // test route
 app.get("/health", (req, res) => {
-  res.status(200).json({ message: "Server is running 🚀" });
+  res.status(200).json({ message: "Server is running" });
 });
 
 // start server

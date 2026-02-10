@@ -1,4 +1,9 @@
 import { useState } from "react";
+import ExpirySelector from "./ExpirySelector";
+import useClipboard from "./useClipboard";
+
+
+
 
 const API = "http://localhost:3000/api";
 
@@ -7,6 +12,7 @@ export default function TextUpload() {
   const [expiresIn, setExpiresIn] = useState(10);
   const [link, setLink] = useState("");
   const [error, setError] = useState("");
+  const { copied, copy } = useClipboard();
 
   const upload = async () => {
     setError("");
@@ -39,15 +45,8 @@ export default function TextUpload() {
         onChange={(e) => setText(e.target.value)}
       />
 
-      <input
-        type="number"
-        min="1"
-        max="1440"
-        className="w-full border border-slate-300 rounded-lg p-2 mb-4"
-        value={expiresIn}
-        onChange={(e) => setExpiresIn(e.target.value)}
-        placeholder="Expiry (minutes)"
-      />
+      <ExpirySelector value={expiresIn} onChange={setExpiresIn} />
+
 
       <button
         onClick={upload}
@@ -59,17 +58,26 @@ export default function TextUpload() {
       {error && <p className="text-red-500 mt-3">{error}</p>}
 
       {link && (
-        <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-          <a
-                href={`http://localhost:5173/view/${link.split("/").pop()}`}
-                target="_blank"
-                className="text-blue-600 underline break-all"
-                >
-                Open Shared Link
-                </a>
+  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center justify-between gap-2">
+        <a
+        href={`http://localhost:5173/view/${link.split("/").pop()}`}
+        target="_blank"
+        className="text-green-700 break-all underline"
+        >
+        Open Shared Link
+        </a>
 
-        </div>
-      )}
+        <button
+        onClick={() =>
+            copy(`http://localhost:5173/view/${link.split("/").pop()}`)
+        }
+        className="text-sm bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+        >
+        {copied ? "Copied!" : "Copy"}
+        </button>
+    </div>
+    )}
+
     </div>
   );
 }

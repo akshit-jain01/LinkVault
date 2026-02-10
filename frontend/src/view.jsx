@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useClipboard from "./useClipboard";
+
 
 const API = "http://localhost:3000/api";
+
+
 
 export default function View() {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const { copied, copy } = useClipboard();
 
   useEffect(() => {
     fetch(`${API}/view/${id}`)
@@ -48,9 +53,19 @@ export default function View() {
             📄 Shared Text
           </h2>
 
-          <pre className="whitespace-pre-wrap bg-slate-50 border rounded p-4 text-slate-700">
-            {data.content}
-          </pre>
+          <div className="relative">
+  <button
+    onClick={() => copy(data.content)}
+    className="absolute top-2 right-2 text-sm bg-slate-200 px-3 py-1 rounded hover:bg-slate-300"
+  >
+    {copied ? "Copied!" : "Copy"}
+  </button>
+
+  <pre className="whitespace-pre-wrap bg-slate-50 border rounded p-4 text-slate-700">
+    {data.content}
+  </pre>
+</div>
+
         </div>
       </div>
     );
