@@ -4,7 +4,7 @@ LinkVault is a full-stack web application that allows users to securely share te
 
 Built using **React, Node.js, Express, and MongoDB**.
 
----
+
 
 ## Features
 
@@ -18,7 +18,7 @@ Built using **React, Node.js, Express, and MongoDB**.
 -  Separate metadata & download APIs
 -  Secure server-side expiry validation
 
----
+
 
 ## Tech Stack
 
@@ -33,33 +33,32 @@ Built using **React, Node.js, Express, and MongoDB**.
 - MongoDB
 - Multer (for file handling)
 
----
 
 ##  Project Structure
 
-linkvault/
-│
-├── backend/
-│ ├── models/
-│ ├── routes/
-│ ├── uploads/
-│ └── index.js
-│
-├── frontend/
-│ ├── src/
-│ └── vite.config.js
-│
+linkvault/<br>
+│ <br>
+├── backend/<br>
+│ ├── models/<br>
+│ ├── routes/<br>
+│ ├── uploads/<br>
+│ └── index.js<br>
+│ <br>
+├── frontend/<br>
+│ ├── src/<br>
+│ └── vite.config.js<br>
+│ <br>
 └── README.md
 
 
----
+
 
 ##  Setup Instructions
 
-### STEP 1:- Clone the repository
+### Step 1:- Clone the repository
 
-git clone <your-repo-url>
-cd linkvault
+- git clone <https://github.com/akshit-jain01/LinkVault>
+- cd linkvault
 
 
 ---
@@ -77,15 +76,15 @@ The server itself runs at :- http://localhost:3000
 
 ---
 
-### Stwp 3:- Frontend Setup
+### Step 3:- Frontend Setup
 
 - cd frontend
 - npm install
 - npm run dev
 
-- The frontend app runs at:- http://localhost:5173
+The frontend app runs at:- http://localhost:5173
 
----
+
 
 ##  How It Works
 
@@ -101,21 +100,25 @@ The server itself runs at :- http://localhost:3000
 - Expired content is deleted after user accesses the link upon its expiry.
 - File downloads use a dedicated `/api/download/:id` endpoint.
 
----
-## API endPoints
+
+## API EndPoints
 
 ### Frontend Routes
-- /                        :-  Upload Page (Text and File tabs)
-- /view/:id                :-  View Shared Content
 
-### Backend Endpoints
+```
+ /                  :  Upload Page (Text and File tabs)
+ /view/:id          :  View Shared Content
+```
+
+### Backend EndPoints
+```
 base URL:-  http://localhost:3000/api
-- POST  /upload            :-  Upload Text
-- POST  /upload-file       :-  Upload File
-- GET   /view/:id          :-  view Metadata
-- GET   /download/:id      :-  download file
+ POST  /upload            :  Upload Text
+ POST  /upload-file       :  Upload File
+ GET   /view/:id          :  view Metadata
+ GET   /download/:id      :  download file
 
----
+```
 
 ##  Design Decisions
 
@@ -125,7 +128,7 @@ base URL:-  http://localhost:3000/api
 - Tailwind-based component UI for consistency
 - Drag-and-drop UX for modern file uploads
 
----
+
 
 ##  Future Improvements
 
@@ -136,9 +139,9 @@ base URL:-  http://localhost:3000/api
 - password based file access
 - cron job for content deletion in real time
 
----
+
 
 ## Author
-Akshit Jain
-25CS60R31
+Akshit Jain<br>
+25CS60R31<br>
 M.Tech CSE
