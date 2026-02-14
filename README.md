@@ -66,11 +66,11 @@ cd linkvault
 
 ### Step 2:-  Backend Setup
 
--cd backend
--npm install
--node index.js
+- cd backend
+- npm install
+- node index.js
 
-## The Server should print:-  "MongoDB connected"
+- The Server should print:-  "MongoDB connected"
 
 The server itself runs at :- http://localhost:3000
 
@@ -79,11 +79,11 @@ The server itself runs at :- http://localhost:3000
 
 ### Stwp 3:- Frontend Setup
 
--cd frontend
--npm install
--npm run dev
+- cd frontend
+- npm install
+- npm run dev
 
-The frontend runs at:- http://localhost:5173
+- The frontend app runs at:- http://localhost:5173
 
 ---
 
@@ -104,16 +104,17 @@ The frontend runs at:- http://localhost:5173
 ---
 ## API endPoints
 
-# Frontend Routes
+### Frontend Routes
 - /                        :-  Upload Page (Text and File tabs)
 - /view/:id                :-  View Shared Content
 
-# Backend Endpoints
+### Backend Endpoints
 base URL:-  http://localhost:3000/api
 - POST  /upload            :-  Upload Text
 - POST  /upload-file       :-  Upload File
 - GET   /view/:id          :-  view Metadata
 - GET   /download/:id      :-  download file
+
 ---
 
 ##  Design Decisions
@@ -123,8 +124,6 @@ base URL:-  http://localhost:3000/api
 - Lazy deletion for expired content
 - Tailwind-based component UI for consistency
 - Drag-and-drop UX for modern file uploads
-
----
 
 ---
 
