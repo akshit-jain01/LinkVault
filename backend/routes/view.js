@@ -16,11 +16,25 @@ router.get("/view/:id", async (req, res) => {
     // ✅ EXPIRY CHECK FIRST
     if (content.expiresAt < new Date()) {
       if (content.type === "file") {
-        fs.unlink(content.content, () => {});
+        const fs = require("fs");
+        const path = require("path");
+
+        const fullPath = path.join(__dirname, "..", content.filePath);
+
+        fs.unlink(fullPath, (err) => {
+          if (err) {
+            console.log("File delete error:", err);
+          } else {
+            console.log("Expired file deleted");
+          }
+        });
       }
+
       await Content.deleteOne({ _id: content._id });
+
       return res.status(403).json({ error: "Link expired" });
     }
+
 
     // ✅ TEXT
     if (content.type === "text") {
@@ -33,7 +47,7 @@ router.get("/view/:id", async (req, res) => {
     // ✅ FILE (metadata only)
     return res.json({
       type: "file",
-      fileName: content.content.split("/").pop(),
+      fileName: content.originalName,
       downloadUrl: `/api/download/${content.shareId}`,
     });
   } catch (err) {
@@ -51,11 +65,28 @@ router.get("/download/:id", async (req, res) => {
       return res.status(404).json({ error: "File not found" });
     }
 
-    res.download(content.content);
+    // ✅ ADD EXPIRY CHECK HERE
+    if (content.expiresAt < new Date()) {
+
+      const fs = require("fs");
+      const path = require("path");
+
+      const fullPath = path.join(__dirname, "..", content.filePath);
+
+      fs.unlink(fullPath, () => {});
+
+      await Content.deleteOne({ _id: content._id });
+
+      return res.status(403).json({ error: "Link expired" });
+    }
+
+    res.download(content.filePath, content.originalName);
+
   } catch (err) {
     console.error("DOWNLOAD ERROR:", err);
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 module.exports = router;

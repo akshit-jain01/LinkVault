@@ -63,9 +63,11 @@ router.post(
       const content = new Content({
         shareId,
         type: "file",
-        content: req.file.path, // local file path
+        filePath: req.file.path,
+        originalName: req.file.originalname,
         expiresAt: expiryTime,
       });
+
 
       await content.save();
 

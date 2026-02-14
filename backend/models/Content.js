@@ -13,7 +13,14 @@ const contentSchema = new mongoose.Schema({
   },
   content: {
     type: String,
-    required: true,
+    
+  },
+  filePath: {
+    type: String,
+  },
+
+  originalName: {
+    type: String,
   },
   expiresAt: {
     type: Date,
